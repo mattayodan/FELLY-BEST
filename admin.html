@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Orders | Felly-Best Foods</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="home.html">
+        <span class="brand-mark">FB</span>
+        <span class="brand-name">Felly-Best Foods</span>
+      </a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="site-nav">
+        <a href="home.html">Home</a>
+        <a href="shop.html">Shop</a>
+        <a href="cart.html">Cart</a>
+        <a href="admin.html" class="btn btn-small">Admin</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="cart-page">
+    <div class="container">
+      <div class="section-header">
+        <h2>Admin Orders</h2>
+        <p>Enter passcode to access purchaser records and orders.</p>
+      </div>
+      <div class="admin-auth-card" data-admin-auth-card>
+        <h3>Admin Security Check</h3>
+        <p>Use your passcode to unlock this page.</p>
+        <form class="admin-auth-form" data-admin-auth-form>
+          <input type="password" placeholder="Enter Admin Passcode" data-admin-passcode />
+          <button type="submit" class="btn">Unlock Admin</button>
+        </form>
+        <p class="auth-status" data-admin-auth-status></p>
+      </div>
+      <section class="hidden" data-admin-panel>
+        <div class="admin-toolbar">
+          <button class="btn btn-ghost btn-small" data-admin-logout>Logout</button>
+        </div>
+        <div class="cart-layout">
+          <table class="cart-table" data-orders-table>
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Date</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>Items</th>
+                <th>Total</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+          <aside class="cart-summary">
+            <h3>Admin Notes</h3>
+            <div class="status-banner show">
+              Orders are secured and stored by the backend server.
+            </div>
+            <p>To clear an order from server records, click Remove on the row.</p>
+          </aside>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <h3>Felly-Best Foods</h3>
+        <p>Fresh Nigerian raw foods made easy.</p>
+      </div>
+      <div class="footer-links">
+        <a href="home.html">Home</a>
+        <a href="shop.html">Shop</a>
+        <a href="cart.html">Cart</a>
+      </div>
+      <div class="footer-links">
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+        <a href="#">WhatsApp</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
+

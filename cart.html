@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Cart | Felly-Best Foods</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="home.html">
+        <span class="brand-mark">FB</span>
+        <span class="brand-name">Felly-Best Foods</span>
+      </a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="site-nav">
+        <a href="home.html">Home</a>
+        <a href="shop.html">Shop</a>
+        <a href="cart.html" class="cart-link">Cart <span class="cart-count" data-cart-count>0</span></a>
+        <a href="home.html#contact" class="btn btn-small">Contact</a>
+        <a href="admin.html" class="btn btn-ghost btn-small">Admin</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="cart-page">
+    <div class="container">
+      <div class="section-header">
+        <h2>Your Cart</h2>
+        <p>Review quantities and total amount before checkout.</p>
+      </div>
+      <div class="cart-layout">
+        <div class="cart-table-wrap">
+          <table class="cart-table" data-cart-table>
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Price</th>
+                <th>Qty</th>
+                <th>Total</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <aside class="cart-summary">
+          <h3>Order Summary</h3>
+          <div class="status-banner" data-status></div>
+          <div>
+            <span>Subtotal</span>
+            <strong data-subtotal>?0</strong>
+          </div>
+          <div>
+            <span>Delivery</span>
+            <strong data-delivery>?0</strong>
+          </div>
+          <div>
+            <span>Total</span>
+            <strong data-total>?0</strong>
+          </div>
+          <div class="cart-actions">
+            <button class="btn" data-checkout>Checkout</button>
+            <button class="btn btn-ghost" data-receipt>Download Receipt PNG</button>
+            <a class="btn btn-ghost" href="shop.html">Continue Shopping</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <div class="checkout-modal" data-checkout-modal aria-hidden="true">
+    <div class="checkout-modal-card">
+      <div class="checkout-modal-head">
+        <h3>Checkout Details</h3>
+        <button type="button" class="checkout-close" data-checkout-close aria-label="Close checkout form">x</button>
+      </div>
+      <p>Enter your details. This information will be included in the WhatsApp order message.</p>
+      <form class="checkout-form" data-checkout-form>
+        <input type="text" name="name" placeholder="Full name" required />
+        <input type="tel" name="phone" placeholder="Phone number" required />
+        <textarea name="address" rows="3" placeholder="Delivery address" required></textarea>
+        <div class="auth-status" data-checkout-form-status></div>
+        <div class="checkout-form-actions">
+          <button type="button" class="btn btn-ghost" data-checkout-close>Cancel</button>
+          <button type="submit" class="btn">Place Order</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <h3>Felly-Best Foods</h3>
+        <p>Fresh Nigerian raw foods made easy.</p>
+      </div>
+      <div class="footer-links">
+        <a href="home.html">Home</a>
+        <a href="shop.html">Shop</a>
+        <a href="home.html#contact">Contact</a>
+      </div>
+      <div class="footer-links">
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+        <a href="#">WhatsApp</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
+

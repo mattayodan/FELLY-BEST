@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop Raw Foods | Felly-Best Foods</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="home.html">
+        <span class="brand-mark">FB</span>
+        <span class="brand-name">Felly-Best Foods</span>
+      </a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="site-nav">
+        <a href="home.html">Home</a>
+        <a href="shop.html">Shop</a>
+        <a href="cart.html" class="cart-link">Cart <span class="cart-count" data-cart-count>0</span></a>
+        <a href="admin.html" class="btn btn-ghost btn-small">Admin</a>
+        <a href="home.html#contact" class="btn btn-small">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero reveal">
+      <div class="container">
+        <p class="eyebrow">Raw Food Shop</p>
+        <h1>Choose your Nigerian market staples</h1>
+        <p class="lead">Set quantities, add to cart, and we will deliver fresh items to your doorstep.</p>
+      </div>
+    </section>
+
+    <section class="products reveal">
+      <div class="container product-grid">
+        <article class="product-card">
+          <img src="images/s-l1200_3.webp" alt="Yam tubers" />
+          <div class="product-body">
+            <h3>White Yam</h3>
+            <p>Fresh tubers for pounded yam or porridge.</p>
+            <div class="product-meta">
+              <span class="price">?3,000</span>
+              <span class="unit">per tuber</span>
+            </div>
+            <div class="qty-row">
+              <label>Qty</label>
+              <input type="number" min="1" value="1" class="qty-input" />
+              <button class="btn" data-add data-id="yam" data-name="White Yam" data-price="3000">Add to cart</button>
+            </div>
+          </div>
+        </article>
+        <article class="product-card">
+          <img src="images/palm oil 25 liters new.jpg" alt="Red palm oil" />
+          <div class="product-body">
+            <h3>Red Palm Oil</h3>
+            <p>Rich, deep red oil for soups and stew.</p>
+            <div class="product-meta">
+              <span class="price">?4,500</span>
+              <span class="unit">per 2L</span>
+            </div>
+            <div class="qty-row">
+              <label>Qty</label>
+              <input type="number" min="1" value="1" class="qty-input" />
+              <button class="btn" data-add data-id="palm-oil" data-name="Red Palm Oil" data-price="4500">Add to cart</button>
+            </div>
+          </div>
+        </article>
+        <article class="product-card">
+          <img src="images/IMG-20210421-WA0002.jpg" alt="Groundnut oil" />
+          <div class="product-body">
+            <h3>Groundnut Oil</h3>
+            <p>Cold-pressed groundnut oil.</p>
+            <div class="product-meta">
+              <span class="price">?5,200</span>
+              <span class="unit">per 2L</span>
+            </div>
+            <div class="qty-row">
+              <label>Qty</label>
+              <input type="number" min="1" value="1" class="qty-input" />
+              <button class="btn" data-add data-id="groundnut-oil" data-name="Groundnut Oil" data-price="5200">Add to cart</button>
+            </div>
+          </div>
+        </article>
+        <article class="product-card">
+          <img src="images/intro-1607082051.jpg" alt="Brown beans" />
+          <div class="product-body">
+            <h3>Brown Beans</h3>
+            <p>Cleaned beans ready for moi-moi and akara.</p>
+            <div class="product-meta">
+              <span class="price">?2,800</span>
+              <span class="unit">per 2kg</span>
+            </div>
+            <div class="qty-row">
+              <label>Qty</label>
+              <input type="number" min="1" value="1" class="qty-input" />
+              <button class="btn" data-add data-id="beans" data-name="Brown Beans" data-price="2800">Add to cart</button>
+            </div>
+          </div>
+        </article>
+        <article class="product-card">
+          <img src="images/Organic-Rice.jpg" alt="Bag of rice" />
+          <div class="product-body">
+            <h3>Local Rice</h3>
+            <p>Stone-free Nigerian rice with aroma.</p>
+            <div class="product-meta">
+              <span class="price">?12,000</span>
+              <span class="unit">per 5kg</span>
+            </div>
+            <div class="qty-row">
+              <label>Qty</label>
+              <input type="number" min="1" value="1" class="qty-input" />
+              <button class="btn" data-add data-id="rice" data-name="Local Rice" data-price="12000">Add to cart</button>
+            </div>
+          </div>
+        </article>
+        <article class="product-card">
+          <img src="images/Bunch-of-Plantain.jpg" alt="Plantain" />
+          <div class="product-body">
+            <h3>Ripe Plantain</h3>
+            <p>Sweet and golden plantain bunch.</p>
+            <div class="product-meta">
+              <span class="price">?1,800</span>
+              <span class="unit">per bunch</span>
+            </div>
+            <div class="qty-row">
+              <label>Qty</label>
+              <input type="number" min="1" value="1" class="qty-input" />
+              <button class="btn" data-add data-id="plantain" data-name="Ripe Plantain" data-price="1800">Add to cart</button>
+            </div>
+          </div>
+        </article>
+        <article class="product-card">
+          <img src="images/GettyImages-1157268325-2000-c92586e6eb2f48f982e47206987fd67b.webp" alt="Cassava" />
+          <div class="product-body">
+            <h3>Cassava</h3>
+            <p>Fresh cassava tubers for garri.</p>
+            <div class="product-meta">
+                            <span class="price">?2,400</span>
+              <span class="unit">per tuber</span>
+            </div>
+            <div class="qty-row">
+              <label>Qty</label>
+              <input type="number" min="1" value="1" class="qty-input" />
+              <button class="btn" data-add data-id="cassava" data-name="Cassava" data-price="2400">Add to cart</button>
+            </div>
+          </div>
+        </article>
+        <article class="product-card">
+          <img src="images/1690641607.jpg" alt="  Dry Fish" />
+          <div class="product-body">
+            <h3>  Dry Fish</h3>
+            <p>Sweet dry fished for soup and stew.</p>
+            <div class="product-meta">
+              <span class="price">?1,500</span>
+              <span class="unit">per one</span>
+            </div>
+            <div class="qty-row">
+              <label>Qty</label>
+              <input type="number" min="1" value="1" class="qty-input" />
+              <button class="btn" data-add data-id="tomatoes" data-name="Fresh Tomatoes" data-price="1500">Add to cart</button>
+            </div>
+          </div>
+        </article>
+        <article class="product-card">
+          <img src="images/" alt="Pepper" />
+          <div class="product-body">
+            <h3>Atarodo Pepper</h3>
+            <p>Hot peppers for rich Nigerian sauces.</p>
+            <div class="product-meta">
+              <span class="price">?1,200</span>
+              <span class="unit">per basket</span>
+            </div>
+            <div class="qty-row">
+              <label>Qty</label>
+              <input type="number" min="1" value="1" class="qty-input" />
+              <button class="btn" data-add data-id="pepper" data-name="Atarodo Pepper" data-price="1200">Add to cart</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <h3>Felly-Best Foods</h3>
+        <p>Fresh Nigerian raw foods made easy.</p>
+      </div>
+      <div class="footer-links">
+        <a href="home.html">Home</a>
+        <a href="cart.html">Cart</a>
+        <a href="home.html#contact">Contact</a>
+      </div>
+      <div class="footer-links">
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+        <a href="#">WhatsApp</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
+
+
+

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign In | Felly-Best Foods</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">FB</span>
+        <span class="brand-name">Felly-Best Foods</span>
+      </a>
+      <nav class="site-nav">
+        <span>Customer Sign In</span>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="landing-auth reveal">
+      <div class="container">
+        <div class="landing-auth-card">
+          <div>
+            <p class="eyebrow">Customer Sign In</p>
+            <h1 class="welcome-title" data-welcome>Sign in to continue shopping</h1>
+            <p>Enter your name, phone number, and address. After sign-in, you will continue to the main page.</p>
+            <p class="auth-status" data-landing-status></p>
+          </div>
+          <form class="landing-form" data-landing-form data-redirect="home.html">
+            <input type="text" name="name" placeholder="Full Name" required />
+            <input type="tel" name="phone" placeholder="Phone Number" required />
+            <input type="text" name="address" placeholder="Delivery Address" required />
+            <button class="btn" type="submit">Sign In</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <h3>Felly-Best Foods</h3>
+        <p>Fresh Nigerian raw foods made easy.</p>
+      </div>
+      <div class="footer-links">
+        <span>Sign in to continue</span>
+      </div>
+      <div class="footer-links">
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+        <a href="#">WhatsApp</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

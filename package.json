@@ -1,0 +1,16 @@
+{
+  "name": "felly-best-foods",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Felly-Best Foods website with backend APIs",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev:netlify": "netlify dev"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^1.0.1",
+    "express": "^4.21.2",
+    "serverless-http": "^3.2.0"
+  }
+}
