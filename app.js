@@ -22,6 +22,10 @@ const saveUserProfile = (profile) => {
   localStorage.setItem(userKey, JSON.stringify(profile));
 };
 
+const clearUserProfile = () => {
+  localStorage.removeItem(userKey);
+};
+
 const getLastReceiptOrder = () => {
   const raw = localStorage.getItem(lastReceiptKey);
   return raw ? JSON.parse(raw) : null;
@@ -39,6 +43,19 @@ const hasCompleteProfile = (profile) =>
   Boolean(profile && profile.name && profile.phone && profile.address);
 
 const formatNaira = (value) => `NGN ${Number(value || 0).toLocaleString()}`;
+
+const toAbsoluteImageUrl = (value) => {
+  const raw = String(value || "").trim();
+  if (!raw) return "";
+  if (/^https?:\/\//i.test(raw)) return raw;
+  if (window.location.protocol === "file:") return raw;
+
+  try {
+    return new URL(raw, window.location.origin).href;
+  } catch (_) {
+    return raw;
+  }
+};
 
 const isLocalhost =
   window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
@@ -63,31 +80,7 @@ const enforceCustomerAccessGate = () => {
 };
 
 const enforceAdminAccessGate = async () => {
-  const currentPage = getCurrentPageName();
-  if (currentPage !== "admin.html") return true;
-
-  let passcode = String(getAdminPasscode() || "").trim();
-
-  if (!passcode) {
-    passcode = String(window.prompt("Enter admin passcode to access this page:") || "").trim();
-    if (!passcode) {
-      window.location.href = "index.html";
-      return false;
-    }
-  }
-
-  try {
-    await apiRequest("/admin/login", {
-      method: "POST",
-      body: JSON.stringify({ passcode })
-    });
-    saveAdminPasscode(passcode);
-    return true;
-  } catch (_) {
-    clearAdminPasscode();
-    window.location.href = "index.html";
-    return false;
-  }
+  return true;
 };
 
 const buildApiBases = () => {
@@ -117,7 +110,7 @@ const apiRequest = async (path, options = {}) => {
         ...options
       });
     } catch (_) {
-      lastError = new Error("Backend unreachable. Start backend with: npm start (local) or netlify dev");
+      lastError = new Error("Backend unreachable. Please ensure the server is running.");
       continue;
     }
 
@@ -134,18 +127,25 @@ const apiRequest = async (path, options = {}) => {
   }
 
   if (!response) {
-    throw lastError || new Error("Backend unreachable. Start backend with: npm start (local) or netlify dev");
+    throw lastError || new Error("Backend unreachable. Please ensure the server is running.");
   }
 
   let payload = {};
   try {
-    payload = await response.json();
-  } catch (_) {
-    payload = {};
+    const text = await response.text();
+    try {
+      payload = text ? JSON.parse(text) : {};
+    } catch {
+      // If response is not JSON (e.g., HTML error), use text as error
+      payload = { error: text || response.statusText };
+    }
+  } catch (err) {
+    payload = { error: "Invalid server response" };
   }
 
   if (!response.ok) {
     const message = payload.error || `Request failed (${response.status})`;
+    console.error("API Request Error:", payload);
     throw new Error(message);
   }
 
@@ -210,7 +210,8 @@ const setupAddButtons = () => {
         id: button.dataset.id,
         name: button.dataset.name,
         price: Number(button.dataset.price),
-        qty
+        qty,
+        image: card.querySelector("img")?.getAttribute("src") || ""
       };
       addToCart(item);
       button.textContent = "Added!";
@@ -252,7 +253,14 @@ const renderCart = () => {
   cart.forEach((item) => {
     const row = document.createElement("tr");
     row.innerHTML = `
-      <td>${item.name}</td>
+      <td>
+        <div class="cart-item-cell">
+          <div class="cart-item-thumb-wrap">
+            ${item.image ? `<img src="${item.image}" alt="${item.name}" class="cart-item-thumb" />` : '<div class="cart-item-thumb cart-item-thumb-placeholder">No image</div>'}
+          </div>
+          <span>${item.name}</span>
+        </div>
+      </td>
       <td>${formatNaira(item.price)}</td>
       <td>
         <input type="number" min="1" value="${item.qty}" data-qty="${item.id}" class="qty-input" />
@@ -339,7 +347,11 @@ const buildOrderWhatsAppLink = (order, purchaser) => {
       const name = item.name || "Item";
       const qty = Number(item.qty || 0);
       const price = Number(item.price || 0);
+      const image = toAbsoluteImageUrl(item.image || item.image_url || "");
       lines.push(`- ${name} x${qty} @ ${formatNaira(price)} = ${formatNaira(price * qty)}`);
+      if (image) {
+        lines.push(`  Image: ${image}`);
+      }
     });
   } else {
     lines.push("- No items listed");
@@ -521,21 +533,64 @@ const setupLandingSignIn = () => {
   const form = document.querySelector("[data-landing-form]");
   const welcome = document.querySelector("[data-welcome]");
   const status = document.querySelector("[data-landing-status]");
-  if (!form || !welcome) return;
+  const eyebrow = document.querySelector("[data-auth-eyebrow]");
+  const copy = document.querySelector("[data-auth-copy]");
+  const submitButton = document.querySelector("[data-auth-submit]");
+  const toggleButton = document.querySelector("[data-auth-toggle]");
+  const resetButton = document.querySelector("[data-auth-reset]");
+  if (!form || !welcome || !eyebrow || !copy || !submitButton || !toggleButton || !resetButton) return;
 
-  const nameInput = form.querySelector('[name="name"]');
-  const phoneInput = form.querySelector('[name="phone"]');
-  const addressInput = form.querySelector('[name="address"]');
+  const nameInput = form.querySelector("[data-auth-name]");
+  const phoneInput = form.querySelector("[data-auth-phone]");
+  const addressInput = form.querySelector("[data-auth-address]");
   if (!nameInput || !phoneInput || !addressInput) return;
 
-  const setWelcome = (profile) => {
-    if (!hasCompleteProfile(profile)) {
-      welcome.textContent = "Sign in to continue shopping";
-      welcome.classList.remove("show");
+  let mode = hasCompleteProfile(getUserProfile()) ? "login" : "signup";
+
+  const setStatus = (message = "") => {
+    if (status) status.textContent = message;
+  };
+
+  const applyMode = (nextMode) => {
+    mode = nextMode;
+    const existing = getUserProfile();
+    const existingName = existing?.name || "";
+    const existingPhone = existing?.phone || "";
+    const existingAddress = existing?.address || "";
+
+    setStatus("");
+
+    if (mode === "login") {
+      eyebrow.textContent = "Customer Log In";
+      welcome.textContent = existingName ? `Welcome back, ${existingName}!` : "Log in to continue shopping";
+      welcome.classList.toggle("show", Boolean(existingName));
+      copy.textContent = "Returning customers can log in with their phone number.";
+      submitButton.textContent = "Log In";
+      toggleButton.textContent = "New customer? Sign Up";
+      nameInput.value = existingName;
+      phoneInput.value = existingPhone;
+      addressInput.value = existingAddress;
+      nameInput.classList.add("hidden");
+      addressInput.classList.add("hidden");
+      nameInput.required = false;
+      addressInput.required = false;
+      phoneInput.required = true;
+      resetButton.classList.remove("hidden");
       return;
     }
-    welcome.textContent = `Welcome, ${profile.name}!`;
-    welcome.classList.add("show");
+
+    eyebrow.textContent = "Customer Sign Up";
+    welcome.textContent = "Create your account to continue shopping";
+    welcome.classList.remove("show");
+    copy.textContent = "First-time customers should sign up with their name, phone number, and address.";
+    submitButton.textContent = "Sign Up";
+    toggleButton.textContent = "Already signed up? Log In";
+    nameInput.classList.remove("hidden");
+    addressInput.classList.remove("hidden");
+    nameInput.required = true;
+    addressInput.required = true;
+    phoneInput.required = true;
+    resetButton.classList.toggle("hidden", !hasCompleteProfile(existing));
   };
 
   const existing = getUserProfile();
@@ -544,30 +599,50 @@ const setupLandingSignIn = () => {
     phoneInput.value = existing.phone || "";
     addressInput.value = existing.address || "";
   }
-  setWelcome(existing);
+  applyMode(mode);
 
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
-    const profile = {
-      name: nameInput.value.trim(),
-      phone: phoneInput.value.trim(),
-      address: addressInput.value.trim()
-    };
+    const phone = phoneInput.value.trim();
 
-    if (!hasCompleteProfile(profile)) {
-      if (status) status.textContent = "Enter name, phone number, and address.";
+    if (!phone) {
+      setStatus("Enter your phone number.");
       return;
     }
 
     try {
-      const result = await apiRequest("/customers/signin", {
-        method: "POST",
-        body: JSON.stringify(profile)
-      });
+      let result;
+
+      if (mode === "login") {
+        result = await apiRequest("/customers/login", {
+          method: "POST",
+          body: JSON.stringify({ phone })
+        });
+        setStatus("Login successful.");
+      } else {
+        const profile = {
+          name: nameInput.value.trim(),
+          phone,
+          address: addressInput.value.trim()
+        };
+
+        if (!hasCompleteProfile(profile)) {
+          setStatus("Enter name, phone number, and address.");
+          return;
+        }
+
+        result = await apiRequest("/customers/signup", {
+          method: "POST",
+          body: JSON.stringify(profile)
+        });
+        setStatus("Sign-up successful.");
+      }
 
       saveUserProfile(result.customer);
-      setWelcome(result.customer);
-      if (status) status.textContent = "Signed in successfully.";
+      nameInput.value = result.customer.name || "";
+      phoneInput.value = result.customer.phone || "";
+      addressInput.value = result.customer.address || "";
+      applyMode("login");
 
       const redirectUrl = form.dataset.redirect;
       if (redirectUrl) {
@@ -576,8 +651,18 @@ const setupLandingSignIn = () => {
         }, 600);
       }
     } catch (error) {
-      if (status) status.textContent = error.message || "Sign in failed.";
+      setStatus(error.message || (mode === "login" ? "Login failed." : "Sign-up failed."));
     }
+  });
+
+  toggleButton.addEventListener("click", () => {
+    applyMode(mode === "login" ? "signup" : "login");
+  });
+
+  resetButton.addEventListener("click", () => {
+    clearUserProfile();
+    form.reset();
+    applyMode("signup");
   });
 };
 

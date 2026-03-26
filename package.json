@@ -9,8 +9,8 @@
     "dev:netlify": "netlify dev"
   },
   "dependencies": {
-    "@neondatabase/serverless": "^1.0.1",
     "express": "^4.21.2",
+    "pg": "^8.20.0",
     "serverless-http": "^3.2.0"
   }
 }

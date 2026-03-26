@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sign In | Felly-Best Foods</title>
+  <title>Customer Access | Felly-Best Foods</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet" />
@@ -17,7 +17,7 @@
         <span class="brand-name">Felly-Best Foods</span>
       </a>
       <nav class="site-nav">
-        <span>Customer Sign In</span>
+        <span>Customer Access</span>
       </nav>
     </div>
   </header>
@@ -27,17 +27,21 @@
       <div class="container">
         <div class="landing-auth-card">
           <div>
-            <p class="eyebrow">Customer Sign In</p>
-            <h1 class="welcome-title" data-welcome>Sign in to continue shopping</h1>
-            <p>Enter your name, phone number, and address. After sign-in, you will continue to the main page.</p>
+            <p class="eyebrow" data-auth-eyebrow>Customer Sign Up</p>
+            <h1 class="welcome-title" data-welcome>Create your account to continue shopping</h1>
+            <p data-auth-copy>First-time customers should sign up with their name, phone number, and address.</p>
             <p class="auth-status" data-landing-status></p>
           </div>
           <form class="landing-form" data-landing-form data-redirect="home.html">
-            <input type="text" name="name" placeholder="Full Name" required />
-            <input type="tel" name="phone" placeholder="Phone Number" required />
-            <input type="text" name="address" placeholder="Delivery Address" required />
-            <button class="btn" type="submit">Sign In</button>
+            <input type="text" name="name" placeholder="Full Name" data-auth-name required />
+            <input type="tel" name="phone" placeholder="Phone Number" data-auth-phone required />
+            <input type="text" name="address" placeholder="Delivery Address" data-auth-address required />
+            <button class="btn" type="submit" data-auth-submit>Sign Up</button>
           </form>
+          <div class="auth-switch-row">
+            <button class="btn btn-ghost btn-small" type="button" data-auth-toggle>Already signed up? Log In</button>
+            <button class="btn btn-ghost btn-small hidden" type="button" data-auth-reset>Use Another Account</button>
+          </div>
         </div>
       </div>
     </section>
@@ -50,7 +54,7 @@
         <p>Fresh Nigerian raw foods made easy.</p>
       </div>
       <div class="footer-links">
-        <span>Sign in to continue</span>
+        <span>Sign up or log in to continue</span>
       </div>
       <div class="footer-links">
         <a href="#">Instagram</a>
