@@ -791,6 +791,49 @@ const setupCheckout = () => {
   });
 };
 
+const setupContactOrderForm = () => {
+  const form = document.querySelector(".contact-form");
+  if (!form) return;
+
+  const [nameInput, emailInput, phoneInput, orderInput] = form.querySelectorAll("input, textarea");
+  const status = form.querySelector("[data-contact-form-status]");
+
+  const setStatus = (message = "") => {
+    if (status) status.textContent = message;
+  };
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const name = String(nameInput?.value || "").trim();
+    const email = String(emailInput?.value || "").trim();
+    const phone = String(phoneInput?.value || "").trim();
+    const orderRequest = String(orderInput?.value || "").trim();
+
+    if (!name || !phone || !orderRequest) {
+      setStatus("Please enter your name, phone number, and order details.");
+      return;
+    }
+
+    const lines = [
+      "Hello Felly-Best Foods, I want to place an order.",
+      "",
+      `Name: ${name}`,
+      `Phone: ${phone}`
+    ];
+
+    if (email) {
+      lines.push(`Email: ${email}`);
+    }
+
+    lines.push("", "Order Details:", orderRequest);
+
+    const whatsappLink = `https://wa.me/${whatsappOrderNumber}?text=${encodeURIComponent(lines.join("\n"))}`;
+    setStatus("Opening WhatsApp...");
+    window.location.href = whatsappLink;
+  });
+};
+
 const setupReceiptDownload = () => {
   const receiptBtn = document.querySelector("[data-receipt]");
   if (!receiptBtn) return;
@@ -931,5 +974,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   setupAddButtons();
   renderCart();
   setupCheckout();
+  setupContactOrderForm();
   setupReceiptDownload();
 });
