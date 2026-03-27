@@ -4,6 +4,7 @@ const { Pool } = require("pg");
 const app = express();
 const PORT = process.env.PORT || 3000;
 const ADMIN_PASSCODE = process.env.ADMIN_PASSCODE || "Felly-BESTT1234";
+const publicDir = path.join(__dirname, "public");
 
 const host = String(process.env.DB_HOST || "localhost").trim();
 const isHostedPostgres =
@@ -34,7 +35,7 @@ const pool = process.env.DATABASE_URL
 
 // Middleware
 app.use(express.json());
-app.use(express.static(__dirname));
+app.use(express.static(publicDir));
 
 // Enable CORS for local development
 app.use((req, res, next) => {
@@ -44,8 +45,6 @@ app.use((req, res, next) => {
   if (req.method === "OPTIONS") return res.sendStatus(200);
   next();
 });
-
-const sendPage = (res, page) => res.sendFile(path.join(__dirname, page));
 
 // ------------------ Helper Functions ------------------
 
@@ -176,30 +175,6 @@ const initDB = async () => {
 };
 
 // ------------------ Routes ------------------
-
-app.get("/", (_req, res) => {
-  sendPage(res, "index.html");
-});
-
-app.get("/index.html", (_req, res) => {
-  sendPage(res, "index.html");
-});
-
-app.get("/home.html", (_req, res) => {
-  sendPage(res, "home.html");
-});
-
-app.get("/shop.html", (_req, res) => {
-  sendPage(res, "shop.html");
-});
-
-app.get("/cart.html", (_req, res) => {
-  sendPage(res, "cart.html");
-});
-
-app.get("/admin.html", (_req, res) => {
-  sendPage(res, "admin.html");
-});
 
 app.get("/api/health", (_req, res) => {
   res.json({ ok: true, storage: "postgres" });
