@@ -13,7 +13,7 @@
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="home.html">
-        <span class="brand-mark">FB</span>
+        <img class="brand-logo" src="images/logo.png" alt="Felly-Best Foods logo" loading="eager" decoding="async" />
         <span class="brand-name">Felly-Best Foods</span>
       </a>
       <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
@@ -32,23 +32,31 @@
   </header>
 
   <main>
-    <section class="page-hero">
-      <div class="container">
-        <p class="eyebrow">Raw Food Shop</p>
-        <h1>Choose your Nigerian market staples</h1>
-        <p class="lead">Set quantities, add to cart, and we will deliver fresh items to your doorstep.</p>
+    <section class="page-hero shop-hero-carousel" data-shop-hero>
+      <div class="page-hero-backdrop" aria-hidden="true"></div>
+      <div class="container page-hero-content">
+        <div class="page-hero-panel">
+          <p class="eyebrow">Raw Food Shop</p>
+          <h1>Choose your Nigerian market staples</h1>
+          <p class="lead">Set quantities, add to cart, and we will deliver fresh items to your doorstep.</p>
+          <div class="hero-carousel-dots" aria-label="Shop background image selector">
+            <button type="button" class="hero-carousel-dot is-active" data-hero-dot="0" aria-label="Show slide 1" aria-pressed="true"></button>
+            <button type="button" class="hero-carousel-dot" data-hero-dot="1" aria-label="Show slide 2" aria-pressed="false"></button>
+            <button type="button" class="hero-carousel-dot" data-hero-dot="2" aria-label="Show slide 3" aria-pressed="false"></button>
+          </div>
+        </div>
       </div>
     </section>
 
     <section class="products">
       <div class="container product-grid">
         <article class="product-card">
-          <img src="images/s-l1200_3.webp" alt="Yam tubers" />
+              <img src="images/s-l1200_3.webp" alt="Yam tubers" loading="lazy" decoding="async" />
           <div class="product-body">
             <h3>White Yam</h3>
             <p>Fresh tubers for pounded yam or porridge.</p>
             <div class="product-meta">
-              <span class="price">?3,000</span>
+              <span class="price">₦3,000</span>
               <span class="unit">per tuber</span>
             </div>
             <div class="qty-row">
@@ -59,12 +67,12 @@
           </div>
         </article>
         <article class="product-card">
-          <img src="images/palm oil 25 liters new.jpg" alt="Red palm oil" />
+          <img src="images/palm oil 25 liters new.jpg" alt="Red palm oil" loading="lazy" decoding="async" />
           <div class="product-body">
             <h3>Red Palm Oil</h3>
             <p>Rich, deep red oil for soups and stew.</p>
             <div class="product-meta">
-              <span class="price">?4,500</span>
+              <span class="price">₦4,500</span>
               <span class="unit">per 2L</span>
             </div>
             <div class="qty-row">
@@ -75,12 +83,12 @@
           </div>
         </article>
         <article class="product-card">
-          <img src="images/IMG-20210421-WA0002.jpg" alt="Groundnut oil" />
+          <img src="images/IMG-20210421-WA0002.jpg" alt="Groundnut oil" loading="lazy" decoding="async" />
           <div class="product-body">
             <h3>Groundnut Oil</h3>
             <p>Cold-pressed groundnut oil.</p>
             <div class="product-meta">
-              <span class="price">?5,200</span>
+              <span class="price">₦5,200</span>
               <span class="unit">per 2L</span>
             </div>
             <div class="qty-row">
@@ -91,12 +99,12 @@
           </div>
         </article>
         <article class="product-card">
-          <img src="images/intro-1607082051.jpg" alt="Brown beans" />
+          <img src="images/intro-1607082051.jpg" alt="Brown beans" loading="lazy" decoding="async" />
           <div class="product-body">
             <h3>Brown Beans</h3>
             <p>Cleaned beans ready for moi-moi and akara.</p>
             <div class="product-meta">
-              <span class="price">?2,800</span>
+              <span class="price">₦2,800</span>
               <span class="unit">per 2kg</span>
             </div>
             <div class="qty-row">
@@ -107,12 +115,12 @@
           </div>
         </article>
         <article class="product-card">
-          <img src="images/Organic-Rice.jpg" alt="Bag of rice" />
+          <img src="images/Organic-Rice.jpg" alt="Bag of rice" loading="lazy" decoding="async" />
           <div class="product-body">
             <h3>Local Rice</h3>
             <p>Stone-free Nigerian rice with aroma.</p>
             <div class="product-meta">
-              <span class="price">?12,000</span>
+              <span class="price">₦12,000</span>
               <span class="unit">per 5kg</span>
             </div>
             <div class="qty-row">
@@ -123,12 +131,12 @@
           </div>
         </article>
         <article class="product-card">
-          <img src="images/Bunch-of-Plantain.jpg" alt="Plantain" />
+          <img src="images/Bunch-of-Plantain.jpg" alt="Plantain" loading="lazy" decoding="async" />
           <div class="product-body">
             <h3>Ripe Plantain</h3>
             <p>Sweet and golden plantain bunch.</p>
             <div class="product-meta">
-              <span class="price">?1,800</span>
+              <span class="price">₦1,800</span>
               <span class="unit">per bunch</span>
             </div>
             <div class="qty-row">
@@ -139,12 +147,12 @@
           </div>
         </article>
         <article class="product-card">
-          <img src="images/GettyImages-1157268325-2000-c92586e6eb2f48f982e47206987fd67b.webp" alt="Cassava" />
+          <img src="images/GettyImages-1157268325-2000-c92586e6eb2f48f982e47206987fd67b.webp" alt="Cassava" loading="lazy" decoding="async" />
           <div class="product-body">
             <h3>Cassava</h3>
             <p>Fresh cassava tubers for garri.</p>
             <div class="product-meta">
-                            <span class="price">?2,400</span>
+                            <span class="price">₦2,400</span>
               <span class="unit">per tuber</span>
             </div>
             <div class="qty-row">
@@ -155,12 +163,12 @@
           </div>
         </article>
         <article class="product-card">
-          <img src="images/1690641607.jpg" alt="  Dry Fish" />
+          <img src="images/pexels-faisal-ibne-kalam-774996459-36525489.jpg" alt="Dry fish" loading="lazy" decoding="async" />
           <div class="product-body">
             <h3>  Dry Fish</h3>
             <p>Sweet dry fished for soup and stew.</p>
             <div class="product-meta">
-              <span class="price">?1,500</span>
+              <span class="price">₦1,500</span>
               <span class="unit">per one</span>
             </div>
             <div class="qty-row">
@@ -171,12 +179,12 @@
           </div>
         </article>
         <article class="product-card">
-          <img src="images/pepper.svg" alt="Pepper" />
+          <img src="images/pepper.svg" alt="Pepper" loading="lazy" decoding="async" />
           <div class="product-body">
-            <h3>Atarodo Pepper</h3>
+            <h3>Arish Potatoes</h3>
             <p>Hot peppers for rich Nigerian sauces.</p>
             <div class="product-meta">
-              <span class="price">?1,200</span>
+              <span class="price">₦1,200</span>
               <span class="unit">per basket</span>
             </div>
             <div class="qty-row">
@@ -187,12 +195,12 @@
           </div>
         </article>
         <article class="product-card">
-          <img src="images/tomatoes.svg" alt="Fresh tomatoes" />
+          <img src="images/tomatoes.svg" alt="Fresh tomatoes" loading="lazy" decoding="async" />
           <div class="product-body">
-            <h3>Fresh Tomatoes</h3>
+            <h3>ogbono</h3>
             <p>Bright red tomatoes for stew, jollof rice, and sauces.</p>
             <div class="product-meta">
-              <span class="price">?1,400</span>
+              <span class="price">₦1,400</span>
               <span class="unit">per basket</span>
             </div>
             <div class="qty-row">
@@ -203,12 +211,12 @@
           </div>
         </article>
         <article class="product-card">
-          <img src="images/beans.svg" alt="Honey beans" />
+          <img src="images/beans.svg" alt="Honey beans" loading="lazy" decoding="async" />
           <div class="product-body">
-            <h3>Honey Beans</h3>
+            <h3>Crayfish</h3>
             <p>Soft-cooking oloyin beans with a naturally sweet taste.</p>
             <div class="product-meta">
-              <span class="price">?3,200</span>
+              <span class="price">₦3,200</span>
               <span class="unit">per 2kg</span>
             </div>
             <div class="qty-row">
@@ -219,12 +227,12 @@
           </div>
         </article>
         <article class="product-card">
-          <img src="images/rice.svg" alt="Ofada rice" />
+          <img src="images/rice.svg" alt="Ofada rice" loading="lazy" decoding="async" />
           <div class="product-body">
-            <h3>Ofada Rice</h3>
+            <h3></h3>
             <p>Local fragrant rice perfect for ayamase and village-style meals.</p>
             <div class="product-meta">
-              <span class="price">?6,500</span>
+              <span class="price">₦6,500</span>
               <span class="unit">per 3kg</span>
             </div>
             <div class="qty-row">
@@ -235,18 +243,18 @@
           </div>
         </article>
         <article class="product-card">
-          <img src="images/market.svg" alt="Garri" />
+          <img src="images/market.svg" alt="Garri" loading="lazy" decoding="async" />
           <div class="product-body">
-            <h3>Ijebu Garri</h3>
+            <h3> Garri</h3>
             <p>Crisp, sour garri for soaking or serving with soup.</p>
-            <div class="product-meta">
-              <span class="price">?2,200</span>
+            <div class="product-meta"> 
+              <span class="price">₦2,200</span>
               <span class="unit">per 2kg</span>
             </div>
             <div class="qty-row">
               <label>Qty</label>
               <input type="number" min="1" value="1" class="qty-input" />
-              <button class="btn" data-add data-id="ijebu-garri" data-name="Ijebu Garri" data-price="2200">Add to cart</button>
+              <button class="btn" data-add data-id="garri" data-name=" Garri" data-price="2200">Add to cart</button>
             </div>
           </div>
         </article>
@@ -265,10 +273,19 @@
         <a href="cart.html">Cart</a>
         <a href="home.html#contact">Contact</a>
       </div>
-      <div class="footer-links">
-        <a href="#">Instagram</a>
-        <a href="#">Facebook</a>
-        <a href="#">WhatsApp</a>
+      <div class="footer-links social-links">
+        <a href="#" class="social-link" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"></rect><circle cx="12" cy="12" r="4.2"></circle><circle cx="17.4" cy="6.6" r="1.1" class="social-fill"></circle></svg>
+          <span>Instagram</span>
+        </a>
+        <a href="#" class="social-link" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 20.5v-7h2.4l.4-3h-2.8V8.6c0-.9.3-1.5 1.6-1.5H16V4.4c-.5-.1-1.4-.2-2.5-.2-2.4 0-4 1.5-4 4.3v2H7v3h2.5v7z"></path></svg>
+          <span>Facebook</span>
+        </a>
+        <a href="#" class="social-link" aria-label="WhatsApp">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4.2a7.8 7.8 0 0 0-6.7 11.8L4 20l4.1-1.1A7.8 7.8 0 1 0 12 4.2zm4.5 11.1c-.2.6-1.2 1.1-1.7 1.2-.5.1-1.2.2-3.4-.8-2.7-1.1-4.5-3.9-4.6-4.1-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.3-.3.6-.4.8-.4h.6c.2 0 .5 0 .7.5.2.6.8 2 .8 2.1.1.2.1.4 0 .6-.1.2-.2.4-.4.6l-.5.5c-.2.2-.3.4-.1.7.2.4 1 1.6 2.1 2.5 1.4 1.3 2.5 1.7 2.9 1.9.4.2.6.1.8-.1.2-.2.9-1 1.1-1.3.2-.3.4-.3.7-.2.3.1 1.8.9 2.1 1 .3.2.5.2.6.3.1.2.1.8-.1 1.4z"></path></svg>
+          <span>WhatsApp</span>
+        </a>
       </div>
     </div>
   </footer>
@@ -276,4 +293,3 @@
   <script src="app.js"></script>
 </body>
 </html>
-

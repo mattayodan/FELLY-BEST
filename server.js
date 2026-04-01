@@ -7,8 +7,10 @@ const ADMIN_PASSCODE = process.env.ADMIN_PASSCODE || "Felly-BESTT1234";
 const publicDir = path.join(__dirname, "public");
 
 const host = String(process.env.DB_HOST || "localhost").trim();
+const databaseUrl = process.env.DATABASE_URL ? String(process.env.DATABASE_URL) : "";
+const dbPassword = process.env.DB_PASSWORD == null ? "" : String(process.env.DB_PASSWORD);
 const isHostedPostgres =
-  Boolean(process.env.DATABASE_URL) ||
+  Boolean(databaseUrl) ||
   (
     host &&
     !["localhost", "127.0.0.1"].includes(host) &&
@@ -17,9 +19,10 @@ const isHostedPostgres =
 const ssl = isHostedPostgres ? { rejectUnauthorized: false } : undefined;
 
 // PostgreSQL connection pool
-const pool = process.env.DATABASE_URL
+const pool = databaseUrl
   ? new Pool({
-      connectionString: process.env.DATABASE_URL,
+      connectionString: databaseUrl,
+      password: dbPassword,
       ssl,
       max: 10
     })
@@ -27,7 +30,7 @@ const pool = process.env.DATABASE_URL
       host,
       port: Number(process.env.DB_PORT) || 5432,
       user: process.env.DB_USER || "postgres",
-      password: process.env.DB_PASSWORD || "",
+      password: dbPassword,
       database: process.env.DB_NAME || "felly",
       ssl,
       max: 10

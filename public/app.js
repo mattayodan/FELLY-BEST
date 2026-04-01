@@ -42,7 +42,7 @@ const clearAdminPasscode = () => sessionStorage.removeItem(adminPassKey);
 const hasCompleteProfile = (profile) =>
   Boolean(profile && profile.name && profile.phone && profile.address);
 
-const formatNaira = (value) => `NGN ${Number(value || 0).toLocaleString()}`;
+const formatNaira = (value) => `₦${Number(value || 0).toLocaleString()}`;
 
 const toAbsoluteImageUrl = (value) => {
   const raw = String(value || "").trim();
@@ -222,6 +222,85 @@ const setupAddButtons = () => {
   });
 };
 
+const setupShopHeroCarousel = () => {
+  const currentPage = getCurrentPageName();
+  if (currentPage !== "shop.html") return;
+
+  const hero = document.querySelector("[data-shop-hero]");
+  const backdrop = hero?.querySelector(".page-hero-backdrop");
+  const dots = hero ? [...hero.querySelectorAll("[data-hero-dot]")] : [];
+  if (!hero || !backdrop || !dots.length) return;
+
+  const slides = [
+    "images/pexels-panduru-10652321.jpg",
+    "images/pexels-daniel-dan-7543155.webp",
+    "images/pexels-ganajp-18328392.jpg"
+  ];
+
+  let activeIndex = 0;
+  let intervalId;
+
+  const renderSlide = (nextIndex) => {
+    activeIndex = (nextIndex + slides.length) % slides.length;
+    hero.style.setProperty("--hero-image", `url("${slides[activeIndex]}")`);
+
+    dots.forEach((dot, index) => {
+      const isActive = index === activeIndex;
+      dot.classList.toggle("is-active", isActive);
+      dot.setAttribute("aria-pressed", String(isActive));
+    });
+  };
+
+  const restartAutoPlay = () => {
+    window.clearInterval(intervalId);
+    intervalId = window.setInterval(() => {
+      renderSlide(activeIndex + 1);
+    }, 4500);
+  };
+
+  dots.forEach((dot, index) => {
+    dot.addEventListener("click", () => {
+      renderSlide(index);
+      restartAutoPlay();
+    });
+  });
+
+  hero.addEventListener("mouseenter", () => window.clearInterval(intervalId));
+  hero.addEventListener("mouseleave", restartAutoPlay);
+
+  renderSlide(0);
+  restartAutoPlay();
+};
+
+const setupSiteBackgroundCarousel = () => {
+  const currentPage = getCurrentPageName();
+  if (currentPage !== "home.html") {
+    document.body.style.removeProperty("--site-bg-image");
+    return;
+  }
+
+  const slides = [
+    "images/pexels-panduru-10652321.jpg",
+    "images/pexels-daniel-dan-7543155.webp",
+    "images/pexels-ganajp-18328392.jpg"
+  ];
+
+  if (!slides.length) return;
+
+  let activeIndex = 0;
+
+  const renderSlide = (nextIndex) => {
+    activeIndex = (nextIndex + slides.length) % slides.length;
+    document.body.style.setProperty("--site-bg-image", `url("${slides[activeIndex]}")`);
+  };
+
+  renderSlide(0);
+
+  window.setInterval(() => {
+    renderSlide(activeIndex + 1);
+  }, 5000);
+};
+
 const updateTotals = (cart) => {
   const subtotalEl = document.querySelector("[data-subtotal]");
   const deliveryEl = document.querySelector("[data-delivery]");
@@ -253,20 +332,20 @@ const renderCart = () => {
   cart.forEach((item) => {
     const row = document.createElement("tr");
     row.innerHTML = `
-      <td>
+      <td data-label="Item">
         <div class="cart-item-cell">
           <div class="cart-item-thumb-wrap">
-            ${item.image ? `<img src="${item.image}" alt="${item.name}" class="cart-item-thumb" />` : '<div class="cart-item-thumb cart-item-thumb-placeholder">No image</div>'}
+            ${item.image ? `<img src="${item.image}" alt="${item.name}" class="cart-item-thumb" loading="lazy" decoding="async" />` : '<div class="cart-item-thumb cart-item-thumb-placeholder">No image</div>'}
           </div>
           <span>${item.name}</span>
         </div>
       </td>
-      <td>${formatNaira(item.price)}</td>
-      <td>
+      <td data-label="Price">${formatNaira(item.price)}</td>
+      <td data-label="Quantity">
         <input type="number" min="1" value="${item.qty}" data-qty="${item.id}" class="qty-input" />
       </td>
-      <td>${formatNaira(item.price * item.qty)}</td>
-      <td><button class="remove-btn" data-remove="${item.id}">Remove</button></td>
+      <td data-label="Total">${formatNaira(item.price * item.qty)}</td>
+      <td data-label="Action"><button class="remove-btn" data-remove="${item.id}">Remove</button></td>
     `;
     tableBody.appendChild(row);
   });
@@ -966,7 +1045,9 @@ const setupAdminAccess = () => {
 document.addEventListener("DOMContentLoaded", async () => {
   if (!enforceCustomerAccessGate()) return;
   if (!(await enforceAdminAccessGate())) return;
+  setupSiteBackgroundCarousel();
   setupNavToggle();
+  setupShopHeroCarousel();
   setupReveal();
   setupLandingSignIn();
   setupAdminAccess();
